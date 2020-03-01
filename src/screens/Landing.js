@@ -1,21 +1,54 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
-import * as tf from '@tensorflow/tfjs';
-import '@tensorflow/tfjs-react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 export default function HomeScreen({navigation}) {
-  tf.ready()
-    .then(res => {
-      console.log(res);
-      console.log('seems ready');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
+    <View style={styles.container}>
+      <View styles={styles.header}>
+        <Text style={styles.headerText}>Tensorflow Js</Text>
+        <Text style={styles.subtitleText}>Bare React native integration</Text>
+      </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Tensor');
+        }}
+        style={styles.button}>
+        <Text style={styles.buttonText}>Try!</Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: '#ff6f00',
+  },
+  header: {
+    width: '80%',
+    justifyContent: 'space-around',
+  },
+  headerText: {
+    fontSize: 36,
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  subtitleText: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  button: {
+    backgroundColor: '#fff',
+    width: '80%',
+    padding: 20,
+    borderRadius: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#ff6f00',
+    textAlign: 'center',
+  },
+});
